@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mairie-gohitafla-v1'
+const CACHE_NAME = 'mairie-gohitafla-v2'
 const OFFLINE_URL = '/'
 
 const PRECACHE_URLS = [

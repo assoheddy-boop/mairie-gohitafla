@@ -30,26 +30,31 @@ function PageLoader() {
 
 function App() {
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/la-mairie" element={<MairiePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/demarches" element={<DemarchesPage />} />
-          <Route path="/actualites" element={<ActualitesPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/demande-document/:type" element={<DemandeDocumentPage />} />
-          <Route path="/patrimoine" element={<PatrimoinePage />} />
-          <Route path="/suivi" element={<SuiviDemandePage />} />
-          <Route path="/agenda" element={<AgendaPage />} />
-          <Route path="/galerie" element={<GaleriePage />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-        <Route path="/agent" element={<AgentDashboard />} />
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/la-mairie" element={<MairiePage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/demarches" element={<DemarchesPage />} />
+        <Route path="/actualites" element={<ActualitesPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/demande-document/:type" element={<DemandeDocumentPage />} />
+        <Route path="/patrimoine" element={<PatrimoinePage />} />
+        <Route path="/suivi" element={<SuiviDemandePage />} />
+        <Route path="/agenda" element={<AgendaPage />} />
+        <Route path="/galerie" element={<GaleriePage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+      <Route
+        path="/agent"
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <AgentDashboard />
+          </Suspense>
+        }
+      />
+    </Routes>
   )
 }
 

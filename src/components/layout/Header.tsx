@@ -6,7 +6,7 @@ import SearchModal from '../SearchModal'
 const navigation = [
   { name: 'Accueil', href: '/' },
   { name: 'La Mairie', href: '/la-mairie' },
-  { name: 'Services en ligne', shortName: 'Services', href: '/services' },
+  { name: 'Services', href: '/services', title: 'Services en ligne' },
   { name: 'Démarches', href: '/demarches' },
   { name: 'Patrimoine', href: '/patrimoine' },
   { name: 'Agenda', href: '/agenda' },
@@ -63,64 +63,56 @@ export default function Header() {
         {/* Main navigation */}
         <nav className="bg-white shadow-lg border-b-4 border-accent-500">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-20">
+            <div className="flex items-center justify-between h-20 gap-2 min-w-0">
               {/* Logo */}
-              <Link to="/" className="flex items-center gap-3 shrink-0">
-                <div className="w-12 h-12 bg-primary-500 rounded-full flex items-center justify-center shadow-md">
-                  <span className="text-white font-heading font-bold text-xl">S</span>
+              <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-500 rounded-full flex items-center justify-center shadow-md flex-shrink-0">
+                  <span className="text-white font-heading font-bold text-lg sm:text-xl">G</span>
                 </div>
-                <div className="hidden sm:block">
-                  <div className="font-heading font-bold text-primary-500 text-lg leading-tight">
+                <div className="hidden sm:block min-w-0">
+                  <div className="font-heading font-bold text-primary-500 text-base lg:text-lg leading-tight truncate">
                     Mairie de Gohitafla
                   </div>
-                  <div className="text-xs text-gray-500 font-medium tracking-wide uppercase">
+                  <div className="text-[10px] lg:text-xs text-gray-500 font-medium tracking-wide uppercase truncate">
                     République de Côte d'Ivoire
                   </div>
                 </div>
               </Link>
 
               {/* Desktop nav */}
-              <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 min-w-0 flex-1 justify-center mx-2 xl:mx-4">
+              <div className="hidden xl:flex items-center gap-0.5 min-w-0">
                 {navigation.map((item) => {
                   const isActive = location.pathname === item.href
                   return (
                     <Link
                       key={item.name}
                       to={item.href}
-                      className={`px-2 xl:px-3 2xl:px-4 py-2 rounded-lg text-xs xl:text-sm font-semibold whitespace-nowrap transition-all duration-200 ${
+                      title={'title' in item ? item.title : undefined}
+                      className={`px-3 py-2 rounded-lg text-sm font-semibold whitespace-nowrap transition-all duration-200 ${
                         isActive
                           ? 'bg-primary-500 text-white shadow-md'
                           : 'text-gray-700 hover:bg-primary-50 hover:text-primary-500'
                       }`}
                     >
-                      {'shortName' in item && item.shortName ? (
-                        <>
-                          <span className="xl:hidden">{item.shortName}</span>
-                          <span className="hidden xl:inline">{item.name}</span>
-                        </>
-                      ) : (
-                        item.name
-                      )}
+                      {item.name}
                     </Link>
                   )
                 })}
               </div>
 
               {/* Search + CTA */}
-              <div className="flex items-center gap-2 xl:gap-3 shrink-0">
-                {/* Search button */}
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                 <button
                   onClick={() => setSearchOpen(true)}
-                  className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-xl text-sm text-gray-500 transition-colors group"
+                  className="hidden sm:flex items-center gap-2 px-3 lg:px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-xl text-sm text-gray-500 transition-colors group"
                 >
                   <Search size={16} className="text-gray-400 group-hover:text-primary-500" />
-                  <span className="hidden md:inline">Rechercher...</span>
-                  <kbd className="hidden md:inline-flex items-center px-1.5 py-0.5 bg-white rounded border border-gray-200 text-[10px] font-medium text-gray-400">
+                  <span className="hidden lg:inline">Rechercher...</span>
+                  <kbd className="hidden lg:inline-flex items-center px-1.5 py-0.5 bg-white rounded border border-gray-200 text-[10px] font-medium text-gray-400">
                     Ctrl+K
                   </kbd>
                 </button>
 
-                {/* Mobile search */}
                 <button
                   onClick={() => setSearchOpen(true)}
                   className="sm:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100"
@@ -128,18 +120,23 @@ export default function Header() {
                   <Search size={22} />
                 </button>
 
-                {/* CTA */}
-                <div className="hidden lg:block">
-                  <Link to="/services" className="btn-accent text-xs xl:text-sm py-2 xl:py-2.5 px-3 xl:px-5 whitespace-nowrap">
-                    <span className="xl:hidden">Demander</span>
-                    <span className="hidden xl:inline">Demander un document</span>
-                  </Link>
-                </div>
+                <Link
+                  to="/services"
+                  className="xl:hidden inline-flex items-center justify-center bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-all shadow-md text-xs sm:text-sm py-2 px-3 sm:px-4 whitespace-nowrap flex-shrink-0"
+                >
+                  Services
+                </Link>
 
-                {/* Mobile menu button */}
+                <Link
+                  to="/services"
+                  className="hidden xl:inline-flex items-center justify-center bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-all shadow-md text-sm py-2.5 px-5 whitespace-nowrap flex-shrink-0"
+                >
+                  Demander un document
+                </Link>
+
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100"
+                  className="xl:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100"
                 >
                   {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -147,11 +144,9 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Mobile nav */}
           {mobileMenuOpen && (
-            <div className="lg:hidden border-t bg-white">
+            <div className="xl:hidden border-t bg-white">
               <div className="px-4 py-4 space-y-1">
-                {/* Mobile search bar */}
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false)
@@ -169,6 +164,7 @@ export default function Header() {
                     <Link
                       key={item.name}
                       to={item.href}
+                      title={'title' in item ? item.title : undefined}
                       onClick={() => setMobileMenuOpen(false)}
                       className={`block px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
                         isActive
@@ -176,7 +172,7 @@ export default function Header() {
                           : 'text-gray-700 hover:bg-primary-50'
                       }`}
                     >
-                      {item.name}
+                      {'title' in item ? item.title : item.name}
                     </Link>
                   )
                 })}
