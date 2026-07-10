@@ -6,7 +6,9 @@ import {
 } from 'lucide-react'
 import { io, Socket } from 'socket.io-client'
 
-const SERVER_URL = `http://${window.location.hostname}:3001`
+import { API_BASE } from '../utils/api'
+
+const SERVER_URL = API_BASE
 
 interface Agent {
   id: string

@@ -8,7 +8,9 @@ import {
   Headphones, UserCheck, Loader2, ArrowLeft
 } from 'lucide-react'
 
-const SERVER_URL = `http://${window.location.hostname}:3001`
+import { API_BASE } from '../utils/api'
+
+const SERVER_URL = API_BASE
 
 interface Message {
   id: string
@@ -462,7 +464,7 @@ export default function Chatbot() {
       </button>
 
       {!isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 animate-bounce">
+        <div className="fixed bottom-24 right-6 z-50 animate-bounce hidden sm:block">
           <div className="bg-white rounded-xl shadow-lg px-4 py-2.5 text-sm font-medium text-gray-700 border relative">
             Besoin d'aide ? 💬
             <div className="absolute -bottom-2 right-6 w-4 h-4 bg-white border-r border-b transform rotate-45" />

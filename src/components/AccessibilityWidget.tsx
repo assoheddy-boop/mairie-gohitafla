@@ -31,7 +31,7 @@ export default function AccessibilityWidget() {
   }
 
   return (
-    <div className="fixed bottom-6 right-24 z-40">
+    <div className="fixed bottom-6 right-20 sm:right-24 z-40 max-[400px]:bottom-24">
       {open && (
         <div className="absolute bottom-14 right-0 bg-white rounded-xl shadow-2xl border border-gray-200 p-5 w-64 mb-2 animate-in">
           <div className="flex items-center justify-between mb-4">

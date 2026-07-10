@@ -1,8 +1,7 @@
-const CACHE_NAME = 'mairie-gohitafla-v2'
+const CACHE_NAME = 'mairie-gohitafla-v3'
 const OFFLINE_URL = '/'
 
 const PRECACHE_URLS = [
-  '/',
   '/favicon.svg',
   '/manifest.json',
 ]
@@ -24,23 +23,25 @@ self.addEventListener('activate', (event) => {
 })
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).catch(() => caches.match(OFFLINE_URL))
-    )
-    return
-  }
+  if (event.request.method !== 'GET') return
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const fetched = fetch(event.request).then((response) => {
+    fetch(event.request)
+      .then((response) => {
         if (response && response.status === 200) {
           const clone = response.clone()
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone))
         }
         return response
       })
-      return cached || fetched
-    })
+      .catch(async () => {
+        const cached = await caches.match(event.request)
+        if (cached) return cached
+        if (event.request.mode === 'navigate') {
+          const offline = await caches.match(OFFLINE_URL)
+          if (offline) return offline
+        }
+        return Response.error()
+      })
   )
 })

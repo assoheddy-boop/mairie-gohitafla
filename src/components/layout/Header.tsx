@@ -62,15 +62,15 @@ export default function Header() {
 
         {/* Main navigation */}
         <nav className="bg-white shadow-lg border-b-4 border-accent-500">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-20 gap-2 min-w-0">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16 sm:h-20 gap-1.5 sm:gap-2 min-w-0">
               {/* Logo */}
-              <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-0">
+              <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-0 max-w-[45%] sm:max-w-none">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-500 rounded-full flex items-center justify-center shadow-md flex-shrink-0">
                   <span className="text-white font-heading font-bold text-lg sm:text-xl">G</span>
                 </div>
-                <div className="hidden sm:block min-w-0">
-                  <div className="font-heading font-bold text-primary-500 text-base lg:text-lg leading-tight truncate">
+                <div className="hidden min-[400px]:block min-w-0">
+                  <div className="font-heading font-bold text-primary-500 text-sm sm:text-base lg:text-lg leading-tight truncate">
                     Mairie de Gohitafla
                   </div>
                   <div className="text-[10px] lg:text-xs text-gray-500 font-medium tracking-wide uppercase truncate">
@@ -101,10 +101,10 @@ export default function Header() {
               </div>
 
               {/* Search + CTA */}
-              <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 <button
                   onClick={() => setSearchOpen(true)}
-                  className="hidden sm:flex items-center gap-2 px-3 lg:px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-xl text-sm text-gray-500 transition-colors group"
+                  className="hidden md:flex items-center gap-2 px-3 lg:px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-xl text-sm text-gray-500 transition-colors group"
                 >
                   <Search size={16} className="text-gray-400 group-hover:text-primary-500" />
                   <span className="hidden lg:inline">Rechercher...</span>
@@ -113,16 +113,9 @@ export default function Header() {
                   </kbd>
                 </button>
 
-                <button
-                  onClick={() => setSearchOpen(true)}
-                  className="sm:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100"
-                >
-                  <Search size={22} />
-                </button>
-
                 <Link
                   to="/services"
-                  className="xl:hidden inline-flex items-center justify-center bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-all shadow-md text-xs sm:text-sm py-2 px-3 sm:px-4 whitespace-nowrap flex-shrink-0"
+                  className="xl:hidden inline-flex items-center justify-center bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-all shadow-md text-xs py-2 px-2.5 min-[400px]:px-3 sm:text-sm sm:px-4 whitespace-nowrap flex-shrink-0"
                 >
                   Services
                 </Link>
